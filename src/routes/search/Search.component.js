@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {MuiThemeProvider, AutoComplete} from 'material-ui';
+import './Search.component.css';
 
 class SearchItem extends Component {
 
@@ -25,6 +26,16 @@ class SearchItem extends Component {
             }
         };
 
+
+        const styles = {
+            underlineStyle: {
+                borderColor: '#FF8619',
+            },
+            floatingLabelFocusStyle: {
+                color: '#FF8619',
+            },
+        };
+
         return (
             <MuiThemeProvider>
                 <div>
@@ -35,6 +46,8 @@ class SearchItem extends Component {
                         dataSource={this.state.dataSource2}
                         searchText={this.state.searchText}
                         onUpdateInput={this.handleUpdateInput}
+                        floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
+                        underlineFocusStyle={styles.underlineStyle}
                     />
                 </div>
                 {wypisz(this.state.searchText)}
@@ -44,3 +57,12 @@ class SearchItem extends Component {
 }
 
 export default SearchItem;
+
+
+
+
+
+
+
+
+
