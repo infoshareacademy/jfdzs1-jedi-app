@@ -7,7 +7,7 @@ import FlatButton from 'material-ui/FlatButton';
 import Toggle from 'material-ui/Toggle';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import './top.nav.component.css';
-import Picture from '../img/picture.component';
+import Picture from '../picture.nav.component/picture.component';
 
 
 class Login extends PureComponent {
@@ -24,7 +24,7 @@ const Logged = (props) => (
     <IconMenu
         {...props}
         iconButtonElement={
-            <IconButton style={{color: 'orange'}}><MoreVertIcon/></IconButton>
+            <IconButton><MoreVertIcon/></IconButton>
         }
         targetOrigin={{horizontal: 'right', vertical: 'top'}}
         anchorOrigin={{horizontal: 'right', vertical: 'top'}}
@@ -50,34 +50,28 @@ class TopNav extends PureComponent {
         return (
             <div>
                 <AppBar
-                    style={
-                        {
-                            zIndex: 1400,
-                            backgroundColor: "#222",
-                            boxShadow: 0,
-                            paddingLeft: 0,
-                        }
-                    }
-                    title={<Picture/>}
+                    className="topBar"
+                    title={<Picture logo="logo"/>}
                     showMenuIconButton={false}
                     iconElementRight={this.state.logged ? <Logged/> : <Login/>}
                 />
                 <div id={"bottomBorder"}></div>
                 {/*Tymczasowy przycisk do zmiany stanu zalogowania*/}
                 <Toggle
+
                     label="Logged"
                     defaultToggled={true}
                     onToggle={this.handleChange}
                     labelPosition="right"
                     style={
                         {
-                            marginLeft: "90%",
+                            marginLeft: "85%",
+                            width: "5%"
                         }}
                 />
             </div>
         );
     }
 }
-
 
 export default TopNav
