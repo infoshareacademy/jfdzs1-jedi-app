@@ -12,7 +12,7 @@ class SearchItem extends Component {
             date: '',
             searchText: '',
             dataSource: [],
-            dataSerch: [],
+            temp: [],
         };
     }
 
@@ -26,8 +26,12 @@ class SearchItem extends Component {
                         items: result[0].rates,
                     });
                     for (let i in this.state.items) {
-                        this.state.dataSource.push(`${this.state.items[i].currency.split('(')[0]}, ${this.state.items[i].code}`);
+                        this.state.dataSource.push(`${this.state.items[i].currency.split(' (')[0]}, ${this.state.items[i].code}`);
                     }
+                    this.setState({
+                        te: true,
+                        temp: this.state.dataSource.slice(),
+                    });
                 },
                 (error) => {
                     this.setState({
@@ -44,18 +48,14 @@ class SearchItem extends Component {
         });
     };
 
+    searchResult = (item) => {
+        this.state.temp = this.state.dataSource.filter((item) => {
+            return item.toLowerCase().search(this.state.searchText.toLowerCase()) !== -1;
+        });
+        return this.state.temp.map(item => <li key={item}>{item}</li>);
+    };
+
     render() {
-
-        const showSearchResult = (item) => {
-            const dataS = this.state.dataSource.filter((item) => {
-                return item.search(this.state.searchText) !== -1;
-            });
-            // if (dataS.length !=0 && item !== '') {
-                console.log(dataS);
-            // }
-        };
-
-
         const styles = {
             underlineStyle: {
                 borderColor: '#FF8619',
@@ -66,7 +66,7 @@ class SearchItem extends Component {
         };
 
 
-        const {error, isLoaded, items} = this.state;
+        const {error, isLoaded, items, dataSource} = this.state;
         if (error) {
             return <div>Error: {error.message}</div>;
         } else if (!isLoaded) {
@@ -84,22 +84,18 @@ class SearchItem extends Component {
                                 floatingLabelText="Wybierz walutę"
                                 filter={AutoComplete.caseInsensitiveFilter}
                                 openOnFocus={true}
-                                dataSource={this.state.dataSource}
+                                dataSource={dataSource}
                                 searchText={this.state.searchText}
                                 onUpdateInput={this.handleUpdateInput}
                                 floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
                                 underlineFocusStyle={styles.underlineStyle}
+                                defaultValue="b"
                             />
                         </div>
-                        {showSearchResult(this.state.searchText)}
                     </MuiThemeProvider>
-                    {/*<ul>*/}
-                    {/*{items.map(item => (*/}
-                    {/*<li key={item.Team}>*/}
-                    {/*{item.Team} {item.Team_name}*/}
-                    {/*</li>*/}
-                    {/*))}*/}
-                    {/*</ul>*/}
+                    <ul>
+                        {this.searchResult(this.state.searchText)}
+                    </ul>
                 </div>
             );
         }
