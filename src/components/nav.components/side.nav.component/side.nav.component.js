@@ -21,23 +21,10 @@ export default class SideMenu extends React.Component {
                     zDepth={0}
                     open={this.state.open}
                 >
-                    <MenuItem
-                        innerDivStyle={
-                            {
-                                marginTop: '65px',
-                                color: '#E5D2BC'
-                            }
-                        }
-                    >
+                    <MenuItem innerDivStyle={{marginTop: '65px',color: '#E5D2BC'}}>
                         Menu Item
                     </MenuItem>
-                    <MenuItem
-                        innerDivStyle={
-                            {
-                                color: '#E5D2BC'
-                            }
-                        }
-                    >
+                    <MenuItem innerDivStyle={{ color: '#E5D2BC'}}>
                         Menu Item 2
                     </MenuItem>
                 </Drawer>
