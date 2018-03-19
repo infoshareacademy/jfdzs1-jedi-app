@@ -1,0 +1,12 @@
+#bottomBorder {
+    background-color: #FF8619;
+    height: 5px;
+    width: 100%;
+}
+
+.topBar {
+    z-index: 1400 !important;
+    background-color: #222 !important;
+    box-shadow: none !important;
+    padding-left: 0 !important;
+}
