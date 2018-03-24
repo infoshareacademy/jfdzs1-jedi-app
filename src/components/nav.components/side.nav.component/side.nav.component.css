@@ -3,3 +3,15 @@
     background-color: #222 !important;
     border-right: solid 5px #FF8619 !important;
 }
+
+a:link {
+    color:#E5D2BC;
+    font-weight: bold;
+    text-decoration: none;
+}
+a:visited {
+    color:#E5D2BC;
+}
+a:hover {
+    color:#FF8619;
+}

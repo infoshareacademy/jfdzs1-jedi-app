@@ -1,5 +1,9 @@
 import React, {Component} from 'react';
-import {MuiThemeProvider, AutoComplete} from 'material-ui';
+import TopNav from '../../components/nav.components/top.nav.component/top.nav.component'
+import SideMenu from '../../components/nav.components/side.nav.component/side.nav.component'
+import {MuiThemeProvider, AutoComplete, Toggle} from 'material-ui';
+import TableResults from '../../components/search.component/TableResults.component'
+import './Search.component.css';
 
 class SearchItem extends Component {
 
@@ -12,7 +16,7 @@ class SearchItem extends Component {
             date: '',
             searchText: '',
             dataSource: [],
-            temp: [],
+            cryptocurrency: false,
         };
     }
 
@@ -25,12 +29,8 @@ class SearchItem extends Component {
                         date: result[0].effectiveDate,
                         items: result[0].rates,
                     });
-                    for (let i in this.state.items) {
-                        this.state.dataSource.push(`${this.state.items[i].currency.split(' (')[0]}, ${this.state.items[i].code}`);
-                    }
                     this.setState({
-                        te: true,
-                        temp: this.state.dataSource.slice(),
+                        dataSource: this.state.items.map(item => `${item.currency.split(' (')[0]}, ${item.code}`),
                     });
                 },
                 (error) => {
@@ -48,11 +48,14 @@ class SearchItem extends Component {
         });
     };
 
-    searchResult = (item) => {
-        this.state.temp = this.state.dataSource.filter((item) => {
-            return item.toLowerCase().search(this.state.searchText.toLowerCase()) !== -1;
-        });
-        return this.state.temp.map(item => <li key={item}>{item}</li>);
+    searchResult = () => {
+        return (this.state.items.filter((item) => {
+            return item.code.toLowerCase().search(this.state.searchText.split(',')[0].toLowerCase()) !== -1 || item.currency.split(' (')[0].toLowerCase().search(this.state.searchText.split(',')[0].toLowerCase()) !== -1;
+        }));
+    };
+
+    handleChange = (event, logged) => {
+        this.setState({cryptocurrency: logged});
     };
 
     render() {
@@ -63,23 +66,63 @@ class SearchItem extends Component {
             floatingLabelFocusStyle: {
                 color: '#FF8619',
             },
+            thumbOff: {
+                backgroundColor: '#FF8619',
+            },
+            thumbSwitched: {
+                backgroundColor: '#FF8619',
+            },
+            trackSwitched: {
+                backgroundColor: 'rgb(190, 190, 190)',
+            },
         };
 
-
-        const {error, isLoaded, items, dataSource} = this.state;
+        const {error, isLoaded, dataSource} = this.state;
         if (error) {
-            return <div>Error: {error.message}</div>;
+            return (
+                <div>
+                    <header className="App-header">
+                        <MuiThemeProvider>
+                            <TopNav/>
+                        </MuiThemeProvider>
+                        <MuiThemeProvider>
+                            <SideMenu/>
+                        </MuiThemeProvider>
+                    </header>
+                    <main>
+                        Error: {error.message}
+                    </main>
+                </div>
+            );
         } else if (!isLoaded) {
             return (
                 <div>
-                    Loading...
+                    <header className="App-header">
+                        <MuiThemeProvider>
+                            <TopNav/>
+                        </MuiThemeProvider>
+                        <MuiThemeProvider>
+                            <SideMenu/>
+                        </MuiThemeProvider>
+                    </header>
+                    <main>
+                        Loading...
+                    </main>
                 </div>
             )
         } else {
             return (
                 <div>
-                    <MuiThemeProvider>
-                        <div>
+                    <header className="App-header">
+                        <MuiThemeProvider>
+                            <TopNav/>
+                        </MuiThemeProvider>
+                        <MuiThemeProvider>
+                            <SideMenu/>
+                        </MuiThemeProvider>
+                    </header>
+                    <main>
+                        <MuiThemeProvider>
                             <AutoComplete
                                 floatingLabelText="Wybierz walutę"
                                 filter={AutoComplete.caseInsensitiveFilter}
@@ -89,13 +132,31 @@ class SearchItem extends Component {
                                 onUpdateInput={this.handleUpdateInput}
                                 floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
                                 underlineFocusStyle={styles.underlineStyle}
-                                defaultValue="b"
                             />
-                        </div>
-                    </MuiThemeProvider>
-                    <ul>
-                        {this.searchResult(this.state.searchText)}
-                    </ul>
+                        </MuiThemeProvider>
+                        <span>Waluty
+                        <MuiThemeProvider>
+                            <Toggle
+                                label="Kryptowaluty"
+                                defaultToggled={false}
+                                onToggle={this.handleChange}
+                                labelPosition="right"
+                                thumbStyle={styles.thumbOff}
+                                trackStyle={styles.trackOff}
+                                thumbSwitchedStyle={styles.thumbSwitched}
+                                trackSwitchedStyle={styles.trackSwitched}
+                                style={{
+                                    width: '10%',
+                                    display: 'inline-block',
+                                }}
+                            />
+                        </MuiThemeProvider>
+                    </span>
+                        <MuiThemeProvider>
+                            <TableResults tableName={this.state.cryptocurrency ? 'Kryptowaluta' : 'Waluta'}
+                                          tableData={this.searchResult(this.state.searchText)}/>
+                        </MuiThemeProvider>
+                    </main>
                 </div>
             );
         }

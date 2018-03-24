@@ -22,10 +22,10 @@ export default class SideMenu extends React.Component {
                     open={this.state.open}
                 >
                     <MenuItem innerDivStyle={{marginTop: '65px',color: '#E5D2BC'}}>
-                        Menu Item
+                        <a href="/">Dashboard</a>
                     </MenuItem>
                     <MenuItem innerDivStyle={{ color: '#E5D2BC'}}>
-                        Menu Item 2
+                        <a href="/search">Wyszukaj</a>
                     </MenuItem>
                 </Drawer>
             </div>
