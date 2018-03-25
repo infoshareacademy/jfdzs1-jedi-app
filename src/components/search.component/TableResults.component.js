@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {
     Table,
     TableBody,
@@ -19,66 +19,55 @@ const styles = {
     },
 };
 
-export default class TableResults extends Component {
-    state = {
-        fixedHeader: true,
-        fixedFooter: true,
-        stripedRows: false,
-        showRowHover: true,
-        selectable: true,
-        multiSelectable: false,
-        enableSelectAll: false,
-        deselectOnClickaway: true,
-        showCheckboxes: false,
-    };
+const TableResults = (props) => {
 
-    render() {
-        return (
-            <div>
-                <Table
-                    onCellClick={(row, col, event) => console.log(this.props.tableData[row])}
-                    height={'65vh'}
-                    fixedHeader={this.state.fixedHeader}
-                    fixedFooter={this.state.fixedFooter}
-                    selectable={this.state.selectable}
-                    multiSelectable={this.state.multiSelectable}
-                    style={{
-                        marginLeft: '256px',
-                        width: '70%',
-                    }}
+    return (
+        <div>
+            <Table
+                onCellClick={(row, col, event) => console.log(props.tableData[row])}
+                height={'65vh'}
+                fixedHeader={true}
+                fixedFooter={true}
+                selectable={true}
+                multiSelectable={false}
+                style={{
+                    marginLeft: '256px',
+                    width: '70%',
+                }}
+            >
+                <TableHeader
+                    displaySelectAll={false}
+                    adjustForCheckbox={false}
+                    enableSelectAll={false}
                 >
-                    <TableHeader
-                        displaySelectAll={this.state.showCheckboxes}
-                        adjustForCheckbox={this.state.showCheckboxes}
-                        enableSelectAll={this.state.enableSelectAll}
-                    >
-                        <TableRow>
-                            <TableHeaderColumn colSpan="3" style={{textAlign: 'center'}}>
-                                {this.props.tableName}
-                            </TableHeaderColumn>
+                    <TableRow>
+                        <TableHeaderColumn colSpan="3" style={{textAlign: 'center'}}>
+                            {props.tableName}
+                        </TableHeaderColumn>
+                    </TableRow>
+                    <TableRow>
+                        <TableHeaderColumn>Nazwa</TableHeaderColumn>
+                        <TableHeaderColumn>Kod</TableHeaderColumn>
+                        <TableHeaderColumn>Wartość (PLN)</TableHeaderColumn>
+                    </TableRow>
+                </TableHeader>
+                <TableBody
+                    displayRowCheckbox={false}
+                    deselectOnClickaway={true}
+                    showRowHover={true}
+                    stripedRows={false}
+                >
+                    {props.tableData.map((row, index) => (
+                        <TableRow key={index}>
+                            <TableRowColumn>{row.currency}</TableRowColumn>
+                            <TableRowColumn>{row.code}</TableRowColumn>
+                            <TableRowColumn>{row.mid}</TableRowColumn>
                         </TableRow>
-                        <TableRow>
-                            <TableHeaderColumn>Nazwa</TableHeaderColumn>
-                            <TableHeaderColumn>Kod</TableHeaderColumn>
-                            <TableHeaderColumn>Wartość (PLN)</TableHeaderColumn>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody
-                        displayRowCheckbox={this.state.showCheckboxes}
-                        deselectOnClickaway={this.state.deselectOnClickaway}
-                        showRowHover={this.state.showRowHover}
-                        stripedRows={this.state.stripedRows}
-                    >
-                        {this.props.tableData.map((row, index) => (
-                            <TableRow key={index}>
-                                <TableRowColumn>{row.currency}</TableRowColumn>
-                                <TableRowColumn>{row.code}</TableRowColumn>
-                                <TableRowColumn>{row.mid}</TableRowColumn>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </div>
-        );
-    }
+                    ))}
+                </TableBody>
+            </Table>
+        </div>
+    );
 }
+
+export default TableResults;
