@@ -4,6 +4,8 @@ import TopNav from './components/nav.components/top.nav.component/top.nav.compon
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import SideMenu from './components/nav.components/side.nav.component/side.nav.component'
 import LoginForm from './components/login.components/login.component'
+import ErrorContainer from './containers/error.container'
+import UserComponent from "./containers/user.container";
 
 class App extends Component {
     render() {
@@ -18,7 +20,7 @@ class App extends Component {
                     </MuiThemeProvider>
                 </header>
                 <main>
-                    <LoginForm/>
+                    <UserComponent/>
                 </main>
             </div>
         );

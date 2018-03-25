@@ -8,6 +8,7 @@ import Toggle from 'material-ui/Toggle';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import './top.nav.component.css';
 import Picture from '../picture.nav.component/picture.component';
+import GoogleLogin from '../../login.components/googlelogin.component'
 
 
 class Login extends PureComponent {
@@ -15,7 +16,10 @@ class Login extends PureComponent {
 
     render() {
         return (
-            <FlatButton {...this.props} label="Login"/>
+            <div>
+                <GoogleLogin/>
+                <FlatButton {...this.props} label="Login"/>
+            </div>
         );
     }
 }
