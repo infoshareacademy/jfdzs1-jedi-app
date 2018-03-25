@@ -30,7 +30,6 @@ export default class TableResults extends Component {
         enableSelectAll: false,
         deselectOnClickaway: true,
         showCheckboxes: false,
-        height: '65vh',
     };
 
     render() {
@@ -38,7 +37,7 @@ export default class TableResults extends Component {
             <div>
                 <Table
                     onCellClick={(row, col, event) => console.log(this.props.tableData[row])}
-                    height={this.state.height}
+                    height={'65vh'}
                     fixedHeader={this.state.fixedHeader}
                     fixedFooter={this.state.fixedFooter}
                     selectable={this.state.selectable}
@@ -79,7 +78,6 @@ export default class TableResults extends Component {
                         ))}
                     </TableBody>
                 </Table>
-
             </div>
         );
     }

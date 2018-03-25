@@ -49,8 +49,9 @@ class SearchItem extends Component {
     };
 
     searchResult = () => {
+        const {searchText} = this.state;
         return (this.state.items.filter((item) => {
-            return item.code.toLowerCase().search(this.state.searchText.split(',')[0].toLowerCase()) !== -1 || item.currency.split(' (')[0].toLowerCase().search(this.state.searchText.split(',')[0].toLowerCase()) !== -1;
+            return item.code.toLowerCase().search(searchText.split(',')[0].toLowerCase()) !== -1 || item.currency.split(' (')[0].toLowerCase().search(searchText.split(',')[0].toLowerCase()) !== -1;
         }));
     };
 
@@ -77,7 +78,7 @@ class SearchItem extends Component {
             },
         };
 
-        const {error, isLoaded, dataSource} = this.state;
+        const {error, isLoaded, dataSource, searchText} = this.state;
         if (error) {
             return (
                 <div>
@@ -128,13 +129,13 @@ class SearchItem extends Component {
                                 filter={AutoComplete.caseInsensitiveFilter}
                                 openOnFocus={true}
                                 dataSource={dataSource}
-                                searchText={this.state.searchText}
+                                searchText={searchText}
                                 onUpdateInput={this.handleUpdateInput}
                                 floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
                                 underlineFocusStyle={styles.underlineStyle}
                             />
                         </MuiThemeProvider>
-                        <span>Waluty
+                        <span>Waluty</span>
                         <MuiThemeProvider>
                             <Toggle
                                 label="Kryptowaluty"
@@ -151,10 +152,9 @@ class SearchItem extends Component {
                                 }}
                             />
                         </MuiThemeProvider>
-                    </span>
                         <MuiThemeProvider>
                             <TableResults tableName={this.state.cryptocurrency ? 'Kryptowaluta' : 'Waluta'}
-                                          tableData={this.searchResult(this.state.searchText)}/>
+                                          tableData={this.searchResult(searchText)}/>
                         </MuiThemeProvider>
                     </main>
                 </div>

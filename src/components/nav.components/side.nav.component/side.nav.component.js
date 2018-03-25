@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -21,12 +22,22 @@ export default class SideMenu extends React.Component {
                     zDepth={0}
                     open={this.state.open}
                 >
-                    <MenuItem innerDivStyle={{marginTop: '65px',color: '#E5D2BC'}}>
-                        <a href="/">Dashboard</a>
-                    </MenuItem>
-                    <MenuItem innerDivStyle={{ color: '#E5D2BC'}}>
-                        <a href="/search">Wyszukaj</a>
-                    </MenuItem>
+                    <Link to="/">
+                        <MenuItem innerDivStyle={{marginTop: '65px', color: '#E5D2BC', fontWeight: 'bold'}}
+                                  onMouseEnter={(e) => e.target.style.color = '#FF8619'}
+                                  onMouseLeave={(e) => e.target.style.color = '#E5D2BC'}
+                        >
+                            Dashboard
+                        </MenuItem>
+                    </Link>
+                    <Link to="/search">
+                        <MenuItem innerDivStyle={{color: '#E5D2BC', fontWeight: 'bold'}}
+                                  onMouseEnter={(e) => e.target.style.color = '#FF8619'}
+                                  onMouseLeave={(e) => e.target.style.color = '#E5D2BC'}
+                        >
+                            Wyszukaj
+                        </MenuItem>
+                    </Link>
                 </Drawer>
             </div>
         );
