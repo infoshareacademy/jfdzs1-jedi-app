@@ -3,7 +3,7 @@ import {presentError} from './error';
 import {provider, auth} from '../firebase'
 
 const signIn = (user) => {
-    console.log(user);
+    console.log("signIn "+ user);
     return {
         type: SIGN_IN,
         user
@@ -11,6 +11,7 @@ const signIn = (user) => {
 };
 
 const signOut = () => {
+    console.log("signOut ");
     return {
         type: SIGN_OUT,
     }
@@ -23,3 +24,12 @@ export const openGoogleSignIn = () => {
             .catch(error => dispatch(presentError('Error while signin in')));
     }
 };
+
+export const openGoogleSignOut =()=>{
+    return()=>{
+        auth.signOut()
+            .then(() => signOut())
+            .catch(() => presentError('Error while signin out'));
+    };
+    };
+
