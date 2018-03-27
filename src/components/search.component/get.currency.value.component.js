@@ -7,9 +7,7 @@ class GetCurrencyValue extends Component {
         super(props);
         this.state = {
             error: null,
-            isLoaded: false,
             items: [],
-            date: '',
         };
     }
 
@@ -18,13 +16,11 @@ class GetCurrencyValue extends Component {
             .then(res => res.json())
             .then(result => {
                     this.setState({
-                        isLoaded: true,
                         items: result,
                     });
                 },
                 (error) => {
                     this.setState({
-                        isLoaded: true,
                         error
                     });
                 }
@@ -32,7 +28,9 @@ class GetCurrencyValue extends Component {
     }
 
     render() {
-        const {error, isLoaded, items} = this.state;
+        const {error, items} = this.state;
+        const currencyName = `${items.currency} (${items.code})`;
+        // const currencyRates =
         if (error) {
             return (
                 <div>
@@ -42,8 +40,7 @@ class GetCurrencyValue extends Component {
         } else {
             return (
                 <div>
-                    {console.log(this.state.items)}
-                    <LineChart/>
+                    <LineChart currencyName={currencyName}/>
                 </div>
             );
         }

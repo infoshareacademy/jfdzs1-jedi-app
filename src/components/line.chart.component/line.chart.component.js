@@ -7,7 +7,7 @@ const LineChart = (props) => {
         <div>
             <Chart
                 chartType="LineChart"
-                data={[['Data', 'Wartość (PLN)'], [8, 12], [4, 5.5]]}
+                data={[['Data', props.currencyName], [8, 12], [4, 5.5]]}
                 options={{
                     hAxis: {title: 'Data'},
                     vAxis: {title: 'Wartość (PLN)'}
