@@ -30,7 +30,10 @@ class GetCurrencyValue extends Component {
     render() {
         const {error, items} = this.state;
         const currencyName = `${items.currency} (${items.code})`;
-        // const currencyRates =
+        const currencyRates = [];
+            for(let item in items.rates) {
+                currencyRates[item] = [items.rates[item].effectiveDate, items.rates[item].mid];
+        }
         if (error) {
             return (
                 <div>
@@ -40,7 +43,7 @@ class GetCurrencyValue extends Component {
         } else {
             return (
                 <div>
-                    <LineChart currencyName={currencyName}/>
+                    <LineChart currencyName={currencyName} currencyRates={currencyRates}/>
                 </div>
             );
         }
