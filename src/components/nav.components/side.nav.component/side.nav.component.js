@@ -22,7 +22,7 @@ export default class SideMenu extends React.Component {
                     zDepth={0}
                     open={this.state.open}
                 >
-                    <Link to="/">
+                    <Link to="/" style={{ textDecoration: 'none' }}>
                         <MenuItem innerDivStyle={{marginTop: '65px', color: '#E5D2BC', fontWeight: 'bold'}}
                                   onMouseEnter={(e) => e.target.style.color = '#FF8619'}
                                   onMouseLeave={(e) => e.target.style.color = '#E5D2BC'}
@@ -30,7 +30,7 @@ export default class SideMenu extends React.Component {
                             Dashboard
                         </MenuItem>
                     </Link>
-                    <Link to="/search">
+                    <Link to="/search" style={{ textDecoration: 'none' }}>
                         <MenuItem innerDivStyle={{color: '#E5D2BC', fontWeight: 'bold'}}
                                   onMouseEnter={(e) => e.target.style.color = '#FF8619'}
                                   onMouseLeave={(e) => e.target.style.color = '#E5D2BC'}

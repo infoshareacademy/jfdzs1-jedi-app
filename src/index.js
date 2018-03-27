@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import SearchItem from './routes/search/Search.component';
+import SearchItem from './routes/search/search.component';
 import {BrowserRouter, Route} from 'react-router-dom';
 
 ReactDOM.render(

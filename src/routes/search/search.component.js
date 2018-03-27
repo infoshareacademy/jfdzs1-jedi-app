@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import TopNav from '../../components/nav.components/top.nav.component/top.nav.component'
 import SideMenu from '../../components/nav.components/side.nav.component/side.nav.component'
 import {MuiThemeProvider, AutoComplete, Toggle} from 'material-ui';
-import TableResults from '../../components/search.component/TableResults.component'
-import './Search.component.css';
+import TableResults from '../../components/search.component/table.results.component'
+import './search.component.css';
 
 class SearchItem extends Component {
 
