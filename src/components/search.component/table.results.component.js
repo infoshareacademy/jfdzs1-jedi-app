@@ -14,17 +14,6 @@ import {
     TableRowColumn,
 } from 'material-ui/Table';
 
-const styles = {
-    propContainer: {
-        width: 200,
-        overflow: 'hidden',
-        margin: '20px auto 0',
-    },
-    propToggleHeader: {
-        margin: '20px auto 10px',
-    },
-};
-
 const check = (e, isChecked) => {
     if(isChecked) {
         console.log(`${e.target.value} dodane do ulubionych`);
@@ -57,6 +46,7 @@ class TableResults extends Component {
                 primary={true}
                 keyboardFocused={true}
                 onClick={this.handleClose}
+                style={{color: '#FF8619'}}
             />,
         ];
 
@@ -95,8 +85,8 @@ class TableResults extends Component {
                         </TableRow>
                         <TableRow>
                             <TableHeaderColumn>Nazwa</TableHeaderColumn>
-                            <TableHeaderColumn>Kod</TableHeaderColumn>
-                            <TableHeaderColumn>Wartość (PLN)</TableHeaderColumn>
+                            <TableHeaderColumn style={{textAlign: 'center'}}>Kod</TableHeaderColumn>
+                            <TableHeaderColumn style={{textAlign: 'center'}}>Wartość (PLN)</TableHeaderColumn>
                             <TableHeaderColumn>Ulubione</TableHeaderColumn>
                         </TableRow>
                     </TableHeader>
@@ -109,14 +99,13 @@ class TableResults extends Component {
                         {this.props.tableData.map((row, index) => (
                             <TableRow key={index}>
                                 <TableRowColumn>{row.currency}</TableRowColumn>
-                                <TableRowColumn>{row.code}</TableRowColumn>
+                                <TableRowColumn style={{textAlign: 'center'}}>{row.code}</TableRowColumn>
                                 <TableRowColumn style={{textAlign: 'center'}}>{row.mid}</TableRowColumn>
-                                <TableRowColumn style={{textAlign: 'right'}}>
+                                <TableRowColumn style={{paddingLeft: '48px'}}>
                                     <Checkbox
-                                        defaultChecked={false}
-                                        checkedIcon={<Star/>}
-                                        uncheckedIcon={<StarBorder style={{fontColor: 'red'}}/>}
-                                        style={styles.checkbox}
+                                        // defaultChecked={false}
+                                        checkedIcon={<Star style={{fill: '#FF8619'}}/>}
+                                        uncheckedIcon={<StarBorder />}
                                         onCheck={check}
                                         value={row.code}
                                     />

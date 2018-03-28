@@ -3,11 +3,13 @@ import { Chart } from 'react-google-charts';
 
 const LineChart = (props) => {
 
+   const {currencyRates} = props;
+
     return(
         <div>
             <Chart
                 chartType="LineChart"
-                data={[['Data', props.currencyName], [8, 12], [4, 5.5]]}
+                data={currencyRates}
                 options={{
                     hAxis: {title: 'Data'},
                     vAxis: {title: 'Wartość (PLN)'}

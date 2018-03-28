@@ -34,6 +34,7 @@ class GetCurrencyValue extends Component {
             for(let item in items.rates) {
                 currencyRates[item] = [items.rates[item].effectiveDate, items.rates[item].mid];
         }
+        const dataCurrencyShow = [['Number', currencyName]].concat(currencyRates);
         if (error) {
             return (
                 <div>
@@ -43,7 +44,7 @@ class GetCurrencyValue extends Component {
         } else {
             return (
                 <div>
-                    <LineChart currencyName={currencyName} currencyRates={currencyRates}/>
+                    <LineChart currencyRates={dataCurrencyShow}/>
                 </div>
             );
         }
