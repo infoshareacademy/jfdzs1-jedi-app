@@ -13,12 +13,13 @@ import {
     TableRow,
     TableRowColumn,
 } from 'material-ui/Table';
+import styles from '../../styles';
 
-const check = (e, isChecked) => {
+const check = (event, isChecked) => {
     if(isChecked) {
-        console.log(`${e.target.value} dodane do ulubionych`);
+        console.log(`${event.target.value} dodane do ulubionych`);
     }else {
-        console.log(`${e.target.value} usunięte z ulubionych`);
+        console.log(`${event.target.value} usunięte z ulubionych`);
     }
 };
 
@@ -46,7 +47,7 @@ class TableResults extends Component {
                 primary={true}
                 keyboardFocused={true}
                 onClick={this.handleClose}
-                style={{color: '#FF8619'}}
+                style={styles.flatButton}
             />,
         ];
 
@@ -68,10 +69,7 @@ class TableResults extends Component {
                     fixedFooter={true}
                     selectable={true}
                     multiSelectable={false}
-                    style={{
-                        marginLeft: '256px',
-                        width: '70%',
-                    }}
+                    style={styles.table}
                 >
                     <TableHeader
                         displaySelectAll={false}
@@ -79,14 +77,14 @@ class TableResults extends Component {
                         enableSelectAll={false}
                     >
                         <TableRow>
-                            <TableHeaderColumn colSpan="3" style={{textAlign: 'center'}}>
+                            <TableHeaderColumn colSpan="3" className="textAlignCenter">
                                 {this.props.tableName}
                             </TableHeaderColumn>
                         </TableRow>
                         <TableRow>
                             <TableHeaderColumn>Nazwa</TableHeaderColumn>
-                            <TableHeaderColumn style={{textAlign: 'center'}}>Kod</TableHeaderColumn>
-                            <TableHeaderColumn style={{textAlign: 'center'}}>Wartość (PLN)</TableHeaderColumn>
+                            <TableHeaderColumn style={styles.textAlignCenter}>Kod</TableHeaderColumn>
+                            <TableHeaderColumn style={styles.textAlignCenter}>Wartość (PLN)</TableHeaderColumn>
                             <TableHeaderColumn>Ulubione</TableHeaderColumn>
                         </TableRow>
                     </TableHeader>
@@ -99,12 +97,12 @@ class TableResults extends Component {
                         {this.props.tableData.map((row, index) => (
                             <TableRow key={index}>
                                 <TableRowColumn>{row.currency}</TableRowColumn>
-                                <TableRowColumn style={{textAlign: 'center'}}>{row.code}</TableRowColumn>
-                                <TableRowColumn style={{textAlign: 'center'}}>{row.mid}</TableRowColumn>
-                                <TableRowColumn style={{paddingLeft: '48px'}}>
+                                <TableRowColumn style={styles.textAlignCenter}>{row.code}</TableRowColumn>
+                                <TableRowColumn style={styles.textAlignCenter}>{row.mid}</TableRowColumn>
+                                <TableRowColumn style={styles.favoriteStar}>
                                     <Checkbox
-                                        // defaultChecked={false}
-                                        checkedIcon={<Star style={{fill: '#FF8619'}}/>}
+                                        defaultChecked={false}
+                                        checkedIcon={<Star style={styles.checkedIconStyle}/>}
                                         uncheckedIcon={<StarBorder />}
                                         onCheck={check}
                                         value={row.code}
