@@ -13,13 +13,16 @@ import {
     TableRow,
     TableRowColumn,
 } from 'material-ui/Table';
+import {addFavotire, removeFavorite} from '../favorites.component/add.remove.functions';
 import styles from '../../styles';
 
 const check = (event, isChecked) => {
-    if(isChecked) {
+    if (isChecked) {
         console.log(`${event.target.value} dodane do ulubionych`);
-    }else {
+        addFavotire(event.target.value);
+    } else {
         console.log(`${event.target.value} usunięte z ulubionych`);
+        removeFavorite(event.target.value);
     }
 };
 
@@ -103,7 +106,7 @@ class TableResults extends Component {
                                     <Checkbox
                                         defaultChecked={false}
                                         checkedIcon={<Star style={styles.checkedIconStyle}/>}
-                                        uncheckedIcon={<StarBorder />}
+                                        uncheckedIcon={<StarBorder/>}
                                         onCheck={check}
                                         value={row.code}
                                     />
