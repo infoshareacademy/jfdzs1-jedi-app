@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import LineChart from '../line.chart.component/line.chart.component'
 
 class GetCurrencyValue extends Component {
-
     constructor(props) {
         super(props);
         this.state = {

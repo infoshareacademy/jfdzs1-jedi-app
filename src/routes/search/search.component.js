@@ -7,7 +7,6 @@ import './search.component.css';
 import styles from '../../styles'
 
 class SearchItem extends Component {
-
     constructor(props) {
         super(props);
         this.state = {

@@ -16,15 +16,14 @@ import {
 import styles from '../../styles';
 
 const check = (event, isChecked) => {
-    if(isChecked) {
+    if (isChecked) {
         console.log(`${event.target.value} dodane do ulubionych`);
-    }else {
+    } else {
         console.log(`${event.target.value} usunięte z ulubionych`);
     }
 };
 
 class TableResults extends Component {
-
     state = {
         open: false,
         currencyName: '',
@@ -40,7 +39,6 @@ class TableResults extends Component {
     };
 
     render() {
-
         const actions = [
             <FlatButton
                 label="Zamknij"
@@ -103,7 +101,7 @@ class TableResults extends Component {
                                     <Checkbox
                                         defaultChecked={false}
                                         checkedIcon={<Star style={styles.checkedIconStyle}/>}
-                                        uncheckedIcon={<StarBorder />}
+                                        uncheckedIcon={<StarBorder/>}
                                         onCheck={check}
                                         value={row.code}
                                     />
