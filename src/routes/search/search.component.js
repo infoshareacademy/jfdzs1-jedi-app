@@ -2,11 +2,11 @@ import React, {Component} from 'react';
 import TopNav from '../../components/nav.components/top.nav.component/top.nav.component'
 import SideMenu from '../../components/nav.components/side.nav.component/side.nav.component'
 import {MuiThemeProvider, AutoComplete, Toggle} from 'material-ui';
-import TableResults from '../../components/search.component/TableResults.component'
-import './Search.component.css';
+import TableResults from '../../components/search.component/table.results.component'
+import './search.component.css';
+import styles from '../../styles'
 
 class SearchItem extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -60,23 +60,6 @@ class SearchItem extends Component {
     };
 
     render() {
-        const styles = {
-            underlineStyle: {
-                borderColor: '#FF8619',
-            },
-            floatingLabelFocusStyle: {
-                color: '#FF8619',
-            },
-            thumbOff: {
-                backgroundColor: '#FF8619',
-            },
-            thumbSwitched: {
-                backgroundColor: '#FF8619',
-            },
-            trackSwitched: {
-                backgroundColor: 'rgb(190, 190, 190)',
-            },
-        };
 
         const {error, isLoaded, dataSource, searchText} = this.state;
         if (error) {
@@ -146,10 +129,7 @@ class SearchItem extends Component {
                                 trackStyle={styles.trackOff}
                                 thumbSwitchedStyle={styles.thumbSwitched}
                                 trackSwitchedStyle={styles.trackSwitched}
-                                style={{
-                                    width: '10%',
-                                    display: 'inline-block',
-                                }}
+                                style={styles.toggle}
                             />
                         </MuiThemeProvider>
                         <MuiThemeProvider>
