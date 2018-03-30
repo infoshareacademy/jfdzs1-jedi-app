@@ -19,9 +19,8 @@ import styles from '../../styles';
 const user = 'test';
 
 class TableResults extends Component {
-
     state = {
-        open: false,
+        openTable: false,
         currencyName: '',
         currencyCode: '',
         favoriteCurrency: [],
@@ -33,23 +32,33 @@ class TableResults extends Component {
         fetch(`https://project-jedi-72218.firebaseio.com/${user}/favorite.json`)
             .then(res => res.json())
             .then(result => {
+                    if (result) {
+                        this.setState({
+                            favoriteCurrency: Object.keys(result),
+                        });
+                    }
                     this.setState({
-                        favoriteCurrency: Object.keys(result),
+                        isLoaded: true,
                     });
                 },
+                (error) => {
+                    this.setState({
+                        isLoaded: true,
+                        error
+                    });
+                }
             );
     };
 
-    handleOpen = () => {
-        this.setState({open: true});
+    handleOpenTable = () => {
+        this.setState({openTable: true});
     };
 
-    handleClose = () => {
-        this.setState({open: false});
+    handleCloseTable = () => {
+        this.setState({openTable: false});
     };
 
     render() {
-
         const {error, isLoaded} = this.state;
         if (error) {
             return (
@@ -58,13 +67,17 @@ class TableResults extends Component {
                 </div>
             );
         } else if (!isLoaded) {
-
-            const actions = [
+            return (
+                <div>
+                </div>
+            )
+        } else {
+            const actionsTable = [
                 <FlatButton
                     label="Zamknij"
                     primary={true}
                     keyboardFocused={true}
-                    onClick={this.handleClose}
+                    onClick={this.handleCloseTable}
                     style={styles.flatButton}
                 />,
             ];
@@ -78,19 +91,11 @@ class TableResults extends Component {
 
             const check = (event, isChecked) => {
                 if (isChecked) {
-                    console.log(`${event.target.value} dodane do ulubionych`);
                     addFavotire(event.target.value);
-                    console.log(this.state.favoriteCurrency);
                 } else {
-                    console.log(`${event.target.value} usunięte z ulubionych`);
                     removeFavorite(event.target.value);
-                    this.setState({
-                        favoriteCurrency: this.state.favoriteCurrency.splice(this.state.favoriteCurrency.indexOf(event.target.value),1),
-                    });
-                    console.log(this.state.favoriteCurrency);
                 }
             };
-
 
             return (
                 <div>
@@ -102,7 +107,7 @@ class TableResults extends Component {
                                     currencyName: this.props.tableData[row].currency,
                                     currencyCode: this.props.tableData[row].code,
                                 });
-                                this.handleOpen();
+                                this.handleOpenTable();
                             }
                         }}
                         height={'65vh'}
@@ -118,7 +123,7 @@ class TableResults extends Component {
                             enableSelectAll={false}
                         >
                             <TableRow>
-                                <TableHeaderColumn colSpan="3" className="textAlignCenter">
+                                <TableHeaderColumn colSpan="4" style={styles.textAlignCenter}>
                                     {this.props.tableName}
                                 </TableHeaderColumn>
                             </TableRow>
@@ -141,7 +146,6 @@ class TableResults extends Component {
                                     <TableRowColumn style={styles.textAlignCenter}>{row.code}</TableRowColumn>
                                     <TableRowColumn style={styles.textAlignCenter}>{row.mid}</TableRowColumn>
                                     <TableRowColumn style={styles.favoriteStar}>
-                                        {console.log(isFavorite(row.code))}
                                         <Checkbox
                                             defaultChecked={isFavorite(row.code) ? true : false}
                                             checkedIcon={<Star style={styles.checkedIconStyle}/>}
@@ -156,10 +160,10 @@ class TableResults extends Component {
                     </Table>
                     <Dialog
                         title={this.state.currencyName}
-                        actions={actions}
+                        actions={actionsTable}
                         modal={false}
-                        open={this.state.open}
-                        onRequestClose={this.handleClose}
+                        open={this.state.openTable}
+                        onRequestClose={this.handleCloseTable}
                     >
                         <GetCurrencyValue currencyCode={this.state.currencyCode}/>
                     </Dialog>

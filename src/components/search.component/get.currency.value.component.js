@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
-import LineChart from '../line.chart.component/line.chart.component'
+import LineChart from '../line.chart.component/line.chart.component';
 
 class GetCurrencyValue extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -29,10 +28,11 @@ class GetCurrencyValue extends Component {
 
     render() {
         const {error, items} = this.state;
+
         const currencyName = `${items.currency} (${items.code})`;
         const currencyRates = [];
-            for(let item in items.rates) {
-                currencyRates[item] = [items.rates[item].effectiveDate, items.rates[item].mid];
+        for (let item in items.rates) {
+            currencyRates[item] = [items.rates[item].effectiveDate, items.rates[item].mid];
         }
         const dataCurrencyShow = [['Number', currencyName]].concat(currencyRates);
         if (error) {
