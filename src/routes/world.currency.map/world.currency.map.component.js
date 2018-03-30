@@ -10,6 +10,7 @@ class WorldCurrencyMap extends Component {
         const options = {
             displayMode: 'auto',
             colors: ['#E5D2BC', '#FF8619'],
+            legend: 'none',
         };
         return (
             <div>
@@ -28,7 +29,6 @@ class WorldCurrencyMap extends Component {
                            data={dataWorldCurrency}
                            options={options}
                            graph_id="GeoChart"
-                           legend={'none'}
                     />
                 </main>
             </div>
