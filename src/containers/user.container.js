@@ -8,7 +8,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToprops = dispatch => ({
     toggle: (user) => {
-        console.log("mapDispatchToprops "+ user);
+        console.log("mapDispatchToprops ");
         const action = user ? openGoogleSignIn():openGoogleSignOut() ;
     return dispatch(action)
     }

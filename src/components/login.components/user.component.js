@@ -1,4 +1,7 @@
-import React from 'react'
+import React from 'react';
+import GoogleLogin from './googlelogin.component'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
 
 const UserComponent = ({ user, toggle}) => {
     if(user) {
@@ -11,6 +14,11 @@ const UserComponent = ({ user, toggle}) => {
     } else {
         return (
             <section className="user">
+                <MuiThemeProvider>
+                <GoogleLogin
+                    className="sign-in" onClick={toggle}
+                />
+                </MuiThemeProvider>
                 <button type="button" className="sign-in" onClick={toggle}>Sign in</button>
             </section>
         )

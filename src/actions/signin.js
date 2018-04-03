@@ -29,6 +29,7 @@ export const openGoogleSignOut =()=>{
     return()=>{
         auth.signOut()
             .then(() => signOut())
+            .then(() => console.log("AAA"))
             .catch(() => presentError('Error while signin out'));
     };
     };
