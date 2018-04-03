@@ -13,115 +13,164 @@ import {
     TableRow,
     TableRowColumn,
 } from 'material-ui/Table';
+import {addFavotire, removeFavorite} from '../favorites.component/add.remove.functions';
 import styles from '../../styles';
 
-const check = (event, isChecked) => {
-    if (isChecked) {
-        console.log(`${event.target.value} dodane do ulubionych`);
-    } else {
-        console.log(`${event.target.value} usunięte z ulubionych`);
-    }
-};
+const user = 'test';
 
 class TableResults extends Component {
     state = {
-        open: false,
+        openTable: false,
         currencyName: '',
         currencyCode: '',
+        favoriteCurrency: [],
+        error: null,
+        isLoaded: false,
     };
 
-    handleOpen = () => {
-        this.setState({open: true});
+    componentWillMount() {
+        fetch(`https://project-jedi-72218.firebaseio.com/${user}/favorite.json`)
+            .then(res => res.json())
+            .then(result => {
+                    if (result) {
+                        this.setState({
+                            favoriteCurrency: Object.keys(result),
+                        });
+                    }
+                    this.setState({
+                        isLoaded: true,
+                    });
+                },
+                (error) => {
+                    this.setState({
+                        isLoaded: true,
+                        error
+                    });
+                }
+            );
     };
 
-    handleClose = () => {
-        this.setState({open: false});
+    handleOpenTable = () => {
+        this.setState({openTable: true});
+    };
+
+    handleCloseTable = () => {
+        this.setState({openTable: false});
     };
 
     render() {
-        const actions = [
-            <FlatButton
-                label="Zamknij"
-                primary={true}
-                keyboardFocused={true}
-                onClick={this.handleClose}
-                style={styles.flatButton}
-            />,
-        ];
+        const {error, isLoaded} = this.state;
+        if (error) {
+            return (
+                <div>
+                    Error: {error.message}
+                </div>
+            );
+        } else if (!isLoaded) {
+            return (
+                <div>
+                </div>
+            )
+        } else {
+            const actionsTable = [
+                <FlatButton
+                    label="Zamknij"
+                    primary={true}
+                    keyboardFocused={true}
+                    onClick={this.handleCloseTable}
+                    style={styles.flatButton}
+                />,
+            ];
 
-        return (
-            <div>
-                <Table
-                    onCellClick={(row, col, event) => {
+            const isFavorite = (currencyCode) => {
+                if (this.state.favoriteCurrency.indexOf(currencyCode) === -1) {
+                    return false;
+                }
+                return true;
+            };
 
-                        if (!event.target.value) {
-                            this.setState({
-                                currencyName: this.props.tableData[row].currency,
-                                currencyCode: this.props.tableData[row].code,
-                            });
-                            this.handleOpen();
-                        }
-                    }}
-                    height={'65vh'}
-                    fixedHeader={true}
-                    fixedFooter={true}
-                    selectable={true}
-                    multiSelectable={false}
-                    style={styles.table}
-                >
-                    <TableHeader
-                        displaySelectAll={false}
-                        adjustForCheckbox={false}
-                        enableSelectAll={false}
+            const check = (event, isChecked) => {
+                if (isChecked) {
+                    addFavotire(event.target.value);
+                } else {
+                    removeFavorite(event.target.value);
+                }
+            };
+
+            return (
+                <div>
+                    <Table
+                        onCellClick={(row, col, event) => {
+
+                            if (!event.target.value) {
+                                this.setState({
+                                    currencyName: this.props.tableData[row].currency,
+                                    currencyCode: this.props.tableData[row].code,
+                                });
+                                this.handleOpenTable();
+                            }
+                        }}
+                        height={'65vh'}
+                        fixedHeader={true}
+                        fixedFooter={true}
+                        selectable={true}
+                        multiSelectable={false}
+                        style={styles.table}
                     >
-                        <TableRow>
-                            <TableHeaderColumn colSpan="3" className="textAlignCenter">
-                                {this.props.tableName}
-                            </TableHeaderColumn>
-                        </TableRow>
-                        <TableRow>
-                            <TableHeaderColumn>Nazwa</TableHeaderColumn>
-                            <TableHeaderColumn style={styles.textAlignCenter}>Kod</TableHeaderColumn>
-                            <TableHeaderColumn style={styles.textAlignCenter}>Wartość (PLN)</TableHeaderColumn>
-                            <TableHeaderColumn>Ulubione</TableHeaderColumn>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody
-                        displayRowCheckbox={false}
-                        deselectOnClickaway={true}
-                        showRowHover={true}
-                        stripedRows={false}
-                    >
-                        {this.props.tableData.map((row, index) => (
-                            <TableRow key={index}>
-                                <TableRowColumn>{row.currency}</TableRowColumn>
-                                <TableRowColumn style={styles.textAlignCenter}>{row.code}</TableRowColumn>
-                                <TableRowColumn style={styles.textAlignCenter}>{row.mid}</TableRowColumn>
-                                <TableRowColumn style={styles.favoriteStar}>
-                                    <Checkbox
-                                        defaultChecked={false}
-                                        checkedIcon={<Star style={styles.checkedIconStyle}/>}
-                                        uncheckedIcon={<StarBorder/>}
-                                        onCheck={check}
-                                        value={row.code}
-                                    />
-                                </TableRowColumn>
+                        <TableHeader
+                            displaySelectAll={false}
+                            adjustForCheckbox={false}
+                            enableSelectAll={false}
+                        >
+                            <TableRow>
+                                <TableHeaderColumn colSpan="4" style={styles.textAlignCenter}>
+                                    {this.props.tableName}
+                                </TableHeaderColumn>
                             </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-                <Dialog
-                    title={this.state.currencyName}
-                    actions={actions}
-                    modal={false}
-                    open={this.state.open}
-                    onRequestClose={this.handleClose}
-                >
-                    <GetCurrencyValue currencyCode={this.state.currencyCode}/>
-                </Dialog>
-            </div>
-        );
-    };
+                            <TableRow>
+                                <TableHeaderColumn>Nazwa</TableHeaderColumn>
+                                <TableHeaderColumn style={styles.textAlignCenter}>Kod</TableHeaderColumn>
+                                <TableHeaderColumn style={styles.textAlignCenter}>Wartość (PLN)</TableHeaderColumn>
+                                <TableHeaderColumn>Ulubione</TableHeaderColumn>
+                            </TableRow>
+                        </TableHeader>
+                        <TableBody
+                            displayRowCheckbox={false}
+                            deselectOnClickaway={true}
+                            showRowHover={true}
+                            stripedRows={false}
+                        >
+                            {this.props.tableData.map((row, index) => (
+                                <TableRow key={index}>
+                                    <TableRowColumn>{row.currency}</TableRowColumn>
+                                    <TableRowColumn style={styles.textAlignCenter}>{row.code}</TableRowColumn>
+                                    <TableRowColumn style={styles.textAlignCenter}>{row.mid}</TableRowColumn>
+                                    <TableRowColumn style={styles.favoriteStar}>
+                                        <Checkbox
+                                            defaultChecked={isFavorite(row.code) ? true : false}
+                                            checkedIcon={<Star style={styles.checkedIconStyle}/>}
+                                            uncheckedIcon={<StarBorder/>}
+                                            onCheck={check}
+                                            value={row.code}
+                                        />
+                                    </TableRowColumn>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                    <Dialog
+                        title={this.state.currencyName}
+                        actions={actionsTable}
+                        modal={false}
+                        open={this.state.openTable}
+                        onRequestClose={this.handleCloseTable}
+                    >
+                        <GetCurrencyValue currencyCode={this.state.currencyCode}/>
+                    </Dialog>
+                </div>
+            );
+        }
+    }
 }
 
 export default TableResults;
