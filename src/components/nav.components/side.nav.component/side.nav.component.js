@@ -30,6 +30,14 @@ export default class SideMenu extends React.Component {
                             Dashboard
                         </MenuItem>
                     </Link>
+                    <Link to="/map" style={styles.link}>
+                        <MenuItem innerDivStyle={styles.menuItem}
+                                  onMouseEnter={(e) => e.target.style.color = appColors.orange}
+                                  onMouseLeave={(e) => e.target.style.color = appColors.creamy}
+                        >
+                            Waluty Świata
+                        </MenuItem>
+                    </Link>
                     <Link to="/search" style={styles.link}>
                         <MenuItem innerDivStyle={styles.menuItem}
                                   onMouseEnter={(e) => e.target.style.color = appColors.orange}
