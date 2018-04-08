@@ -10,8 +10,8 @@ const signIn = (user) => {
     }
 };
 
-const signOut = () => {
-    console.log("signOut ");
+const signOut = (user) => {
+    console.log("signOut "+user);
     return {
         type: SIGN_OUT,
     }
@@ -28,8 +28,8 @@ export const openGoogleSignIn = () => {
 export const openGoogleSignOut =()=>{
     return()=>{
         auth.signOut()
-            .then(() => signOut())
             .then(() => console.log("AAA"))
+            .then(() => signOut())
             .catch(() => presentError('Error while signin out'));
     };
     };

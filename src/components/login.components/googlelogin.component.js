@@ -4,6 +4,7 @@ import IconButton from 'material-ui/IconButton';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 
 export default class GoogleLoginComponent extends React.Component{
@@ -14,8 +15,6 @@ export default class GoogleLoginComponent extends React.Component{
         }
     }
     logged: false;
-
-    // console.log("GoogleLoginComponent "+ this.props.user);
 
     handleClick(e){
         e.preventDefault();
@@ -29,6 +28,8 @@ export default class GoogleLoginComponent extends React.Component{
     render(){
     if(this.state.logged) {
         return (
+            <MuiThemeProvider>
+
             <IconMenu
                 iconButtonElement={
                     <IconButton><MoreVertIcon/></IconButton>
@@ -40,10 +41,13 @@ export default class GoogleLoginComponent extends React.Component{
                 <MenuItem primaryText="Ulubione"/>
                 <MenuItem primaryText="Wyloguj"/>
             </IconMenu>
+            </MuiThemeProvider>
         );
     } else {
         return (
+            <MuiThemeProvider>
             <FlatButton onClick={this.handleClick.bind(this)} label="Zaloguj"/>
+            </MuiThemeProvider>
         )
     }}
 
