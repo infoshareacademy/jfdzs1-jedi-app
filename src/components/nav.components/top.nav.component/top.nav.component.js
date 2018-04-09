@@ -3,7 +3,6 @@ import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
 import './top.nav.component.css';
 import Picture from '../picture.nav.component/picture.component';
-import GoogleLogin from '../../login.components/googlelogin.component'
 import UserComponent from '../../../containers/user.container'
 
 
