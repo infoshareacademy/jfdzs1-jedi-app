@@ -29,6 +29,7 @@ class WorldCurrencyMap extends Component {
                            data={dataWorldCurrency}
                            options={options}
                            graph_id="GeoChart"
+                           mapsApiKey="AIzaSyD-9y6qq07HhU1bvMsywg0Srvj3waC3wS8"
                     />
                 </main>
             </div>
