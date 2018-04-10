@@ -6,6 +6,7 @@ import WorldMap from './routes/world.currency.map/world.currency.map.component';
 import SearchItem from './routes/search/search.component';
 import Favorites from './routes/favorites/favorites.component';
 import {BrowserRouter, Route} from 'react-router-dom';
+import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render(
     <BrowserRouter>
@@ -19,3 +20,4 @@ ReactDOM.render(
     document.getElementById('root')
 );
 
+registerServiceWorker();
