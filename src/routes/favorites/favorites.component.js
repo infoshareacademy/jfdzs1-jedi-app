@@ -12,7 +12,6 @@ class SearchItem extends Component {
         this.state = {
             error: null,
             isLoaded: false,
-            favoritesCurrencyValue: [],
             userFavoritesCurrency: [],
         };
     }
@@ -23,20 +22,14 @@ class SearchItem extends Component {
             .then(result => {
                     if (result) {
                         const keys = Object.keys(result);
-                        for(let i=0;i<keys.length;i++){
+                        for (let i = 0; i < keys.length; i++) {
                             fetch(`http://api.nbp.pl/api/exchangerates/rates/a/${keys[i]}/?format=json`)
                                 .then(resV => resV.json())
                                 .then(resultV => this.setState({
-                                    userFavoritesCurrency: [...this.state.userFavoritesCurrency, resultV]
-                                    // userFavoritesCurrency: [...this.state.userFavoritesCurrency, [resultV.currency, resultV.code, resultV.rates[0].mid]],
-                                })
-                        )
+                                        userFavoritesCurrency: [...this.state.userFavoritesCurrency, resultV]
+                                    })
+                                )
                         }
-
-                        // this.setState({
-                        //     userFavoritesCurrency: Object.keys(result),
-                        //     isLoaded: true,
-                        // });
                         this.setState({
                             isLoaded: true,
                         });
@@ -49,35 +42,6 @@ class SearchItem extends Component {
                     });
                 }
             );
-
-        // this.state.userFavoritesCurrency.forEach(item => {
-        //     fetch(`http://api.nbp.pl/api/exchangerates/rates/a/${item}/?format=json`)
-        //         .then(res => res.json())
-        //         .then(result => console.log(result)
-        //         );
-        // });
-        // console.log(this.state.userFavoritesCurrency);
-
-        // this.state.userFavoritesCurrency.map(item => {
-        //
-        // });
-
-
-        // fetch('http://api.nbp.pl/api/exchangerates/tables/a/?format=json')
-        //     .then(res => res.json())
-        //     .then(result => {
-        //             this.setState({
-        //                 isLoaded: true,
-        //                 favorites: result[0].rates,
-        //             });
-        //         },
-        //         (error) => {
-        //             this.setState({
-        //                 isLoaded: true,
-        //                 error
-        //             });
-        //         }
-        //     )
     }
 
     render() {

@@ -42,10 +42,8 @@ class TableResults extends Component {
             />,
         ];
 
-        const check = (event, isChecked) => {
-            if (!isChecked) {
-                removeFavorite(event.target.value);
-            }
+        const check = (event) => {
+            removeFavorite(event.target.value);
         };
 
         return (
@@ -95,7 +93,7 @@ class TableResults extends Component {
                             <TableRow key={index}>
                                 <TableRowColumn>{row.currency}</TableRowColumn>
                                 <TableRowColumn style={styles.textAlignCenter}>{row.code}</TableRowColumn>
-                                <TableRowColumn style={styles.textAlignCenter}>{row.mid}</TableRowColumn>
+                                <TableRowColumn style={styles.textAlignCenter}>{row.rates[0].mid}</TableRowColumn>
                                 <TableRowColumn style={styles.favoriteStar}>
                                     <Checkbox
                                         defaultChecked={true}
