@@ -8,9 +8,7 @@ import './user.component.css'
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-const UserComponent = ({ user, toggle}) => {
-    //
-    //
+const UserComponent = ({ user, actions}) => {
     if(user) {
         return (
         <MuiThemeProvider>
@@ -28,19 +26,16 @@ const UserComponent = ({ user, toggle}) => {
                 >
                     <MenuItem primaryText="Odśwież" onClick={()=>{window.location.reload()}}/>
                     <MenuItem primaryText="Ulubione"/>
-                    <MenuItem primaryText="Wyloguj" onClick={toggle}/>
+                    <MenuItem primaryText="Wyloguj" onClick={actions.openGoogleSignOut}/>
                 </IconMenu>
             </section>
         </MuiThemeProvider>
         );
-    }
-    //
-    //
-    else {
+    }else {
         return (
             <section className="user">
                 <MuiThemeProvider>
-                    <FlatButton onClick={toggle} label="Zaloguj" style={{color:"#e5d2bc"}}/>
+                    <FlatButton onClick={actions.openGoogleSignIn} label="Zaloguj" style={{color:"#e5d2bc"}}/>
                 </MuiThemeProvider>
             </section>
         )

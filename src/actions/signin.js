@@ -3,7 +3,6 @@ import {presentError} from './error';
 import {provider, auth} from '../firebase';
 
 const signIn = (user) => {
-    console.log("signIn ");
     return {
         type: SIGN_IN,
         user
@@ -11,15 +10,13 @@ const signIn = (user) => {
 };
 
 const signOut = () => {
-    console.log("signOut ");
-    this.state.user = null;
+    window.location.reload();
     return {
         type: SIGN_OUT,
     }
 };
 
-export const openGoogleSignIn = (user) => {
-    console.log(JSON.stringify(user));
+export const openGoogleSignIn = () => {
     return (dispatch) => {
         auth.signInWithPopup(provider)
             .then(result => dispatch(signIn(result.user)))
@@ -27,7 +24,7 @@ export const openGoogleSignIn = (user) => {
     }
 };
 
-export const openGoogleSignOut =(user)=>{
+export const openGoogleSignOut =()=>{
     return()=>{
         auth.signOut()
             .then(() => signOut())

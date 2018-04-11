@@ -4,6 +4,13 @@ import TextField from 'material-ui/TextField';
 import React, {Component} from 'react';
 import './login.component.css'
 
+
+/*
+
+ Component for future login feature for users registered to crats app
+
+*/
+
 class LoginForm extends Component {
     constructor(props){
         super(props);

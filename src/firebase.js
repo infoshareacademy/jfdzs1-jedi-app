@@ -12,4 +12,4 @@ import firebase from 'firebase'
 
 export const provider = new firebase.auth.GoogleAuthProvider();
 
-export const auth = new firebase.auth()
+export const auth = new firebase.auth();
