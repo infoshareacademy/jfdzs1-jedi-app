@@ -54,6 +54,10 @@ export default {
         width: '70%',
     },
 
+    tableFavorites: {
+        width: '95%',
+    },
+
     textAlignCenter: {
         textAlign: 'center',
     },

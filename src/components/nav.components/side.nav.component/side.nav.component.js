@@ -46,6 +46,14 @@ export default class SideMenu extends React.Component {
                             Wyszukaj
                         </MenuItem>
                     </Link>
+                    <Link to="/favorites" style={styles.link}>
+                        <MenuItem innerDivStyle={styles.menuItem}
+                                  onMouseEnter={(e) => e.target.style.color = appColors.orange}
+                                  onMouseLeave={(e) => e.target.style.color = appColors.creamy}
+                        >
+                            Ulubione
+                        </MenuItem>
+                    </Link>
                 </Drawer>
             </div>
         );
