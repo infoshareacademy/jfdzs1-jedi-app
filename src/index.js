@@ -4,10 +4,8 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers'
-
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-
 import './index.css';
 
 
@@ -24,7 +22,7 @@ const store = createStore(
         </Provider>,
         document.getElementById('root'),
         registerServiceWorker()
-    )
+    );
 
 
 

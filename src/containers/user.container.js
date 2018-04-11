@@ -8,10 +8,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToprops = dispatch => ({
     toggle: (user) => {
-        console.log("mapDispatchToprops1");
         //FIXME action condition doesn't work
-        const action = user.uid ? openGoogleSignOut():openGoogleSignIn();
-        console.log(action);
+        const action = user ? openGoogleSignIn():openGoogleSignOut();
         return dispatch(action)
     }
 });

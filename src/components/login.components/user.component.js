@@ -7,43 +7,31 @@ import Chip from 'material-ui/Chip';
 import './user.component.css'
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import SvgIconFace from 'material-ui/svg-icons/action/face';
-import Avatar from 'material-ui/Avatar';
-
-
 
 const UserComponent = ({ user, toggle}) => {
     //
     //
     if(user) {
         return (
+        <MuiThemeProvider>
             <section className="user">
-            <MuiThemeProvider>
                 <Chip
                      backgroundColor={'#222 '}
                      labelColor={"#e5d2bc"}
                 >
-                    <Avatar
-                        color="#e5d2bc"
-                        backgroundColor={'#222'}
-                        icon={<SvgIconFace />} />
                 {user.displayName}</Chip>
                 <IconMenu
-                    iconButtonElement={
-                        <IconButton className={"user"}                     ><MoreVertIcon/></IconButton>
-                    }
-                    targetOrigin={{horizontal: 'right', vertical: 'top'}}
-                    anchorOrigin={{horizontal: 'right', vertical: 'top'}}
+                    iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
+                    anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
+                    targetOrigin={{ horizontal: 'right', vertical: 'top' }}
+                    iconStyle={{ fill: 'rgb(229,210,188)' }}
                 >
-
-                    <MenuItem  primaryText="Odśwież"/>
+                    <MenuItem primaryText="Odśwież" onClick={()=>{window.location.reload()}}/>
                     <MenuItem primaryText="Ulubione"/>
                     <MenuItem primaryText="Wyloguj" onClick={toggle}/>
                 </IconMenu>
-                {/*<div className="user-name">{user.displayName}</div>*/}
-
-            </MuiThemeProvider>
             </section>
+        </MuiThemeProvider>
         );
     }
     //
