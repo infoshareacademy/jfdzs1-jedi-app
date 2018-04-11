@@ -1,5 +1,6 @@
 import React from 'react';
 import PieChart from '../pie.chart.component/pie.chart.component';
+import './dashboard.style.css';
 
 const preciousMetals = () => {
 
@@ -16,8 +17,8 @@ const preciousMetals = () => {
         ['Cynk', 12318.49],
     ];
 
-    return(
-        <div>
+    return (
+        <div className="displayInline">
             <PieChart id="pieChartMetals" name="Metale szlachetne" data={data}/>
         </div>
     );

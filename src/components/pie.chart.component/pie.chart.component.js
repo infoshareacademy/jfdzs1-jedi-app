@@ -15,8 +15,6 @@ const PieChart = (props) => {
                     pieStartAngle: 100,
                 }}
                 graph_id={props.id}
-                width="35%"
-                height="30vh"
             />
         </div>
     );
