@@ -53,7 +53,6 @@ class cryptocurrencyValue extends Component {
         } else {
             return (
                 <div className="displayInline">
-                    {console.log(this.state.userFavoritesCurrency)}
                     <PieChart id="pieChartCryptocurrency" name="Kryptowaluty" data={this.state.userFavoritesCurrency}/>
                 </div>
             );

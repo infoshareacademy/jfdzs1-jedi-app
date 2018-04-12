@@ -1,0 +1,16 @@
+.positive {
+    color: green;
+}
+
+.negative {
+    color: red;
+}
+
+.elementInlie {
+    display: inline-block;
+    width: 33%;
+}
+
+.elementCenter {
+    text-align: center;
+}

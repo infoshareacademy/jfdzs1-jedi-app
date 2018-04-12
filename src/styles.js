@@ -69,4 +69,11 @@ export default {
     checkedIconStyle: {
         fill: appColors.orange,
     },
+
+    paper: {
+        margin: '10px 15px',
+        padding: '10px',
+        display: 'inline-block',
+        textAlign: 'left',
+    }
 }
