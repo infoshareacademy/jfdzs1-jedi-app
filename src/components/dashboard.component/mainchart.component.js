@@ -16,7 +16,7 @@ class Main extends PureComponent {
             'firstcurrency': {
                 cur: "",
                 toggle: true
-            }
+            },
             error: null,
             items:[]
         };
