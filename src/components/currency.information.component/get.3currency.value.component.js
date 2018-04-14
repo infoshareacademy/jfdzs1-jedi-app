@@ -6,16 +6,28 @@ class Get3CurrencyValue extends Component {
         super(props);
         this.state = {
             error: null,
-            items: [],
+            item1Name: '',
+            items1: [],
+            item2Name: '',
+            items2: [],
+            item3Name: '',
+            items3: [],
         };
     }
 
     componentWillMount() {
-        fetch(`http://api.nbp.pl/api/exchangerates/rates/a/${this.props.currencyCode.toLowerCase()}/last/93/?format=json`)
+        fetch(`http://api.nbp.pl/api/exchangerates/rates/a/${this.props.currencyCode1.toLowerCase()}/last/93/?format=json`)
             .then(res => res.json())
             .then(result => {
+                this.setState({
+                    items1Name: `${result.currency} (${result.code})`
+                });
+                return Object.values(result)
+            })
+            .then(result => Object.values(result[3]))
+            .then(result => {
                     this.setState({
-                        items: result,
+                        items1: result,
                     });
                 },
                 (error) => {
@@ -23,16 +35,63 @@ class Get3CurrencyValue extends Component {
                         error
                     });
                 }
-            )
+            );
+        fetch(`http://api.nbp.pl/api/exchangerates/rates/a/${this.props.currencyCode2.toLowerCase()}/last/93/?format=json`)
+            .then(res => res.json())
+            .then(result => {
+                this.setState({
+                    items2Name: `${result.currency} (${result.code})`
+                });
+                return Object.values(result)
+            })
+            .then(result => Object.values(result[3]))
+            .then(result => {
+                    this.setState({
+                        items2: result,
+                    });
+                },
+                (error) => {
+                    this.setState({
+                        error
+                    });
+                }
+            );
+        fetch(`http://api.nbp.pl/api/exchangerates/rates/a/${this.props.currencyCode3.toLowerCase()}/last/93/?format=json`)
+            .then(res => res.json())
+            .then(result => {
+                this.setState({
+                    items3Name: `${result.currency} (${result.code})`
+                });
+                return Object.values(result)
+            })
+            .then(result => Object.values(result[3]))
+            .then(result => {
+                    this.setState({
+                        items3: result,
+                    });
+                },
+                (error) => {
+                    this.setState({
+                        error
+                    });
+                }
+            );
     }
 
     componentWillUpdate(nextProps, nextState) {
-        if (nextProps !== this.props) {
-            fetch(`http://api.nbp.pl/api/exchangerates/rates/a/${nextProps.currencyCode.toLowerCase()}/last/93/?format=json`)
+        if (nextProps.currencyCode1 !== this.props.currencyCode1) {
+            fetch(`http://api.nbp.pl/api/exchangerates/rates/a/${nextProps.currencyCode1.toLowerCase()}/last/93/?format=json`)
                 .then(res => res.json())
                 .then(result => {
+                    this.setState({
+                        items1Name: `${result.currency} (${result.code})`
+                    });
+                    return Object.values(result)
+                })
+                .then(result => Object.values(result[3]))
+                .then(result => {
                         this.setState({
-                            items: result,
+                            items1: result,
                         });
                     },
                     (error) => {
@@ -40,19 +99,66 @@ class Get3CurrencyValue extends Component {
                             error
                         });
                     }
-                )
+                );
+        }
+        if (nextProps.currencyCode2 !== this.props.currencyCode2) {
+            fetch(`http://api.nbp.pl/api/exchangerates/rates/a/${nextProps.currencyCode2.toLowerCase()}/last/93/?format=json`)
+                .then(res => res.json())
+                .then(result => {
+                    this.setState({
+                        items2Name: `${result.currency} (${result.code})`
+                    });
+                    return Object.values(result)
+                })
+                .then(result => Object.values(result[3]))
+                .then(result => {
+                        this.setState({
+                            items2: result,
+                        });
+                    },
+                    (error) => {
+                        this.setState({
+                            error
+                        });
+                    }
+                );
+        }
+        if (nextProps.currencyCode3 !== this.props.currencyCode3) {
+            fetch(`http://api.nbp.pl/api/exchangerates/rates/a/${nextProps.currencyCode3.toLowerCase()}/last/93/?format=json`)
+                .then(res => res.json())
+                .then(result => {
+                    this.setState({
+                        items3Name: `${result.currency} (${result.code})`
+                    });
+                    return Object.values(result)
+                })
+                .then(result => Object.values(result[3]))
+                .then(result => {
+                        this.setState({
+                            items3: result,
+                        });
+                    },
+                    (error) => {
+                        this.setState({
+                            error
+                        });
+                    }
+                );
         }
     }
 
     render() {
-        const {error, items} = this.state;
-
-        const currencyName = `${items.currency} (${items.code})`;
+        const {error, items1Name, items1, items2Name, items2, items3Name, items3} = this.state;
         const currencyRates = [];
-        for (let item in items.rates) {
-            currencyRates[item] = [items.rates[item].effectiveDate, items.rates[item].mid];
+        const items1Values = Object.values(items1.map((item) => item.mid));
+        const items2Values = Object.values(items2.map((item) => item.mid));
+        const items3Values = Object.values(items3.map((item) => item.mid));
+        const currencyDate = Object.values(items1.map((item) => item.effectiveDate));
+        for (let i = 0; i < items1Values.length; i++) {
+            currencyRates[i] = [currencyDate[i], items1Values[i], items2Values[i], items3Values[i]];
         }
-        const dataCurrencyShow = [['Number', currencyName]].concat(currencyRates);
+
+        const dataCurrencyShow = [['Number', items1Name, items2Name, items3Name]].concat(currencyRates);
         if (error) {
             return (
                 <div>

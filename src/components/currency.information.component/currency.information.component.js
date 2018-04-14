@@ -102,7 +102,9 @@ class CurrencyInformation extends Component {
                             <ChangeCurrencyRate currencyCode={this.state.value3}/>
                         </Paper>
                     </div>
-                    <Get3CurrencyValue currencyCode={this.state.value1}/>
+                    <Get3CurrencyValue currencyCode1={this.state.value1}
+                                       currencyCode2={this.state.value2}
+                                       currencyCode3={this.state.value3}/>
                 </div>
             );
         }
