@@ -92,6 +92,7 @@ class Get3CurrencyValue extends Component {
                 .then(result => {
                         this.setState({
                             items1: result,
+                            isLoaded1: true,
                         });
                     },
                     (error) => {
@@ -149,7 +150,7 @@ class Get3CurrencyValue extends Component {
 
     render() {
         const {error, items1Name, items1, items2Name, items2, items3Name, items3} = this.state;
-        const currencyRates = [];
+        let currencyRates = [];
         const items1Values = Object.values(items1.map((item) => item.mid));
         const items2Values = Object.values(items2.map((item) => item.mid));
         const items3Values = Object.values(items3.map((item) => item.mid));
@@ -157,7 +158,6 @@ class Get3CurrencyValue extends Component {
         for (let i = 0; i < items1Values.length; i++) {
             currencyRates[i] = [currencyDate[i], items1Values[i], items2Values[i], items3Values[i]];
         }
-
         const dataCurrencyShow = [['Number', items1Name, items2Name, items3Name]].concat(currencyRates);
         if (error) {
             return (

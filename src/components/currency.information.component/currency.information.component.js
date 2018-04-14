@@ -17,7 +17,6 @@ class CurrencyInformation extends Component {
             error: null,
             isLoaded: false,
             items: [],
-            dataSource: [],
         };
     }
 
@@ -28,10 +27,6 @@ class CurrencyInformation extends Component {
                     this.setState({
                         isLoaded: true,
                         items: result[0].rates,
-                    });
-                    this.setState({
-                        dataSource: this.state.items.map(item => <MenuItem value={item.code} key={item.code}
-                                                                           primaryText={`${item.currency} ${item.code}`}/>),
                     });
                 },
                 (error) => {
@@ -54,7 +49,7 @@ class CurrencyInformation extends Component {
     };
 
     render() {
-        const {error, isLoaded, dataSource} = this.state;
+        const {error, isLoaded} = this.state;
         if (error) {
             return (
                 <main>
@@ -77,7 +72,8 @@ class CurrencyInformation extends Component {
                                 onChange={this.handleChange1}
                                 maxHeight={200}
                             >
-                                {dataSource}
+                                {this.state.items.map(item => <MenuItem value={item.code} key={item.code}
+                                                                        primaryText={`${item.currency} ${item.code}`}/>)}
                             </SelectField>
                             <ChangeCurrencyRate currencyCode={this.state.value1}/>
                         </Paper>
@@ -87,7 +83,8 @@ class CurrencyInformation extends Component {
                                 onChange={this.handleChange2}
                                 maxHeight={200}
                             >
-                                {dataSource}
+                                {this.state.items.map(item => <MenuItem value={item.code} key={item.code}
+                                                                        primaryText={`${item.currency} ${item.code}`}/>)}
                             </SelectField>
                             <ChangeCurrencyRate currencyCode={this.state.value2}/>
                         </Paper>
@@ -97,7 +94,8 @@ class CurrencyInformation extends Component {
                                 onChange={this.handleChange3}
                                 maxHeight={200}
                             >
-                                {dataSource}
+                                {this.state.items.map(item => <MenuItem value={item.code} key={item.code}
+                                                                        primaryText={`${item.currency} ${item.code}`}/>)}
                             </SelectField>
                             <ChangeCurrencyRate currencyCode={this.state.value3}/>
                         </Paper>
