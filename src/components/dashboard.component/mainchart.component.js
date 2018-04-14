@@ -4,7 +4,7 @@ import { render } from 'react-dom';
 import { Chart } from 'react-google-charts';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import EuroSymbol from 'material-ui/svg-icons/action/euro-symbol';
-import UsdSymbol from 'material-ui/svg-icons/editor/attach-money';
+//import UsdSymbol from 'material-ui/svg-icons/editor/attach-money';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 
@@ -16,12 +16,7 @@ class Main extends PureComponent {
             'firstcurrency': {
                 cur: "",
                 toggle: true
-            },
-            'secondcurrency': {
-                cur: "",
-                toggle: true
-            },
-
+            }
             error: null,
             items:[]
         };
@@ -68,8 +63,7 @@ class Main extends PureComponent {
                 <div className={'my-pretty-chart-container'}>
                     <FloatingActionButton
                         onClick={(curr='firstcurrency', short='eur') => this.Switcher(curr, short)}><EuroSymbol/></FloatingActionButton>
-                    <FloatingActionButton
-                        onClick={(curr='secondcurrency', short='usd') => this.Switcher(curr, short)}><UsdSymbol/></FloatingActionButton>
+
 
                     <Chart
                         chartType="LineChart"
