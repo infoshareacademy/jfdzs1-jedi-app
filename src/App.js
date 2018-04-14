@@ -24,9 +24,15 @@ class App extends Component {
                     <MuiThemeProvider>
                         <CurrencyInformation/>
                     </MuiThemeProvider>
-                    <Cryptocurrency/>
-                    <WIGComponent/>
-                    <PreciousMetals/>
+                    <MuiThemeProvider>
+                        <Cryptocurrency/>
+                    </MuiThemeProvider>
+                    <MuiThemeProvider>
+                        <WIGComponent/>
+                    </MuiThemeProvider>
+                    <MuiThemeProvider>
+                        <PreciousMetals/>
+                    </MuiThemeProvider>
                 </main>
             </div>
         );

@@ -3,7 +3,7 @@ import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import Paper from 'material-ui/Paper';
 import ChangeCurrencyRate from './change.currency.rate.component';
-import GetCurrencyValue from '../search.component/get.currency.value.component';
+import Get3CurrencyValue from './get.3currency.value.component';
 import './change.currency.rate.component.css';
 import styles from '../../styles';
 
@@ -102,7 +102,7 @@ class CurrencyInformation extends Component {
                             <ChangeCurrencyRate currencyCode={this.state.value3}/>
                         </Paper>
                     </div>
-                    <GetCurrencyValue currencyCode={this.state.value1}/>
+                    <Get3CurrencyValue currencyCode={this.state.value1}/>
                 </div>
             );
         }

@@ -44,13 +44,15 @@ class TableResults extends Component {
 
         const check = (event) => {
             removeFavorite(event.target.value);
+            setTimeout( () => {
+                this.props.isChanged();
+            },400);
         };
 
         return (
             <div>
                 <Table
                     onCellClick={(row, col, event) => {
-
                         if (!event.target.value) {
                             this.setState({
                                 currencyName: this.props.tableData[row].currency,

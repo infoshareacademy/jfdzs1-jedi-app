@@ -15,7 +15,6 @@ class ChangeCurrencyRate extends Component {
     }
 
     componentWillMount() {
-        console.log(this.props.currencyCode);
         fetch(`http://api.nbp.pl/api/exchangerates/rates/c/${this.props.currencyCode}/last/2/?format=json`)
             .then(res => res.json())
             .then(result => {
@@ -34,6 +33,32 @@ class ChangeCurrencyRate extends Component {
                     });
                 }
             )
+    }
+
+    componentWillUpdate(nextProps, nextState) {
+        if (nextProps !== this.props) {
+            console.log(`Nowe propsy ${nextProps.currencyCode} stare propsy ${this.props.currencyCode}`);
+            fetch(`http://api.nbp.pl/api/exchangerates/rates/c/${nextProps.currencyCode}/last/2/?format=json`)
+                .then(res => res.json())
+                .then(result => {
+                        console.log(result);
+                        this.setState({
+                            askPrevious: result.rates[0].ask,
+                            bidPrevious: result.rates[0].bid,
+                            askCurrent: result.rates[1].ask,
+                            bidCurrent: result.rates[1].bid,
+                        });
+                    },
+                    (error) => {
+                        this.setState({
+                            askPrevious: 0,
+                            bidPrevious: 0,
+                            askCurrent: 0,
+                            bidCurrent: 0,
+                        });
+                    }
+                )
+        }
     }
 
     render() {

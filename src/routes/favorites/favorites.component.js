@@ -11,8 +11,8 @@ class SearchItem extends Component {
         super(props);
         this.state = {
             error: null,
-            isLoaded: false,
             userFavoritesCurrency: [],
+            change: false,
         };
     }
 
@@ -37,15 +37,52 @@ class SearchItem extends Component {
                 },
                 (error) => {
                     this.setState({
-                        isLoaded: true,
                         error
                     });
                 }
             );
     }
 
+    componentWillUpdate(nextProps, nextState) {
+        if (nextState.change) {
+            fetch(`https://project-jedi-72218.firebaseio.com/${user}/favorite.json`)
+                .then(res => res.json())
+                .then(result => {
+                        if (result) {
+                            const keys = Object.keys(result);
+                            for (let i = 0; i < keys.length; i++) {
+                                fetch(`http://api.nbp.pl/api/exchangerates/rates/a/${keys[i]}/?format=json`)
+                                    .then(resV => resV.json())
+                                    .then(resultV => this.setState({
+                                            userFavoritesCurrency: [...this.state.userFavoritesCurrency, resultV]
+                                        })
+                                    )
+                            }
+                            this.setState({
+                                isLoaded: true,
+                                change: false,
+                            });
+                        }
+                    },
+                    (error) => {
+                        this.setState({
+                            isLoaded: true,
+                            change: false,
+                            error
+                        });
+                    }
+                );
+        }
+    }
+
     render() {
-        const {error, isLoaded, userFavoritesCurrency} = this.state;
+        const change = () => {
+            this.setState({
+                change: true,
+                userFavoritesCurrency: [],
+            });
+        };
+        const {error, userFavoritesCurrency} = this.state;
         if (error) {
             return (
                 <div>
@@ -62,22 +99,6 @@ class SearchItem extends Component {
                     </main>
                 </div>
             );
-        } else if (!isLoaded) {
-            return (
-                <div>
-                    <header className="App-header">
-                        <MuiThemeProvider>
-                            <TopNav/>
-                        </MuiThemeProvider>
-                        <MuiThemeProvider>
-                            <SideMenu/>
-                        </MuiThemeProvider>
-                    </header>
-                    <main>
-                        Loading...
-                    </main>
-                </div>
-            )
         } else {
             return (
                 <div>
@@ -92,7 +113,8 @@ class SearchItem extends Component {
                     <main>
                         <MuiThemeProvider>
                             <TableFavorites tableName={'Ulubione waluty'}
-                                            tableData={userFavoritesCurrency}/>
+                                            tableData={userFavoritesCurrency}
+                                            isChanged={change}/>
                         </MuiThemeProvider>
                     </main>
                 </div>

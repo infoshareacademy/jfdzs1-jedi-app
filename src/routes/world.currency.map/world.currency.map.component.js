@@ -24,7 +24,7 @@ class WorldCurrencyMap extends Component {
                 </header>
                 <main>
                     <Chart chartType="GeoChart"
-                           width={"95%"}
+                           width={"98%"}
                            height={"85vh"}
                            data={dataWorldCurrency}
                            options={options}

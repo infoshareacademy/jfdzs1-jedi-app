@@ -20,6 +20,10 @@ export default {
         marginTop: '65px',
     },
 
+    autoComplete: {
+        marginLeft: '20px',
+    },
+
     underlineStyle: {
         borderColor: appColors.orange,
     },
@@ -50,12 +54,13 @@ export default {
     },
 
     table: {
-        marginLeft: '256px',
+        marginLeft: '276px',
         width: '70%',
     },
 
     tableFavorites: {
-        width: '95%',
+        marginLeft: '5%',
+        width: '90%',
     },
 
     textAlignCenter: {
@@ -75,5 +80,6 @@ export default {
         padding: '10px',
         display: 'inline-block',
         textAlign: 'left',
+        width: '30%',
     }
 }
