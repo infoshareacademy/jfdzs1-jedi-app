@@ -6,6 +6,7 @@ import SideMenu from './components/nav.components/side.nav.component/side.nav.co
 import PreciousMetals from './components/dashboard.component/precious.metals.component';
 import WIGComponent from './components/dashboard.component/wig.component';
 import Cryptocurrency from './components/dashboard.component/cryptocurrency.component';
+import Main from './components/dashboard.component/mainchart.component'
 
 class App extends Component {
     render() {
@@ -20,6 +21,7 @@ class App extends Component {
                     </MuiThemeProvider>
                 </header>
                 <main>
+                    <Main/>
                     <Cryptocurrency/>
                     <WIGComponent/>
                     <PreciousMetals/>
