@@ -1,9 +1,13 @@
 import React, {PureComponent} from 'react';
 import './App.css';
 import TopNav from './components/nav.components/top.nav.component/top.nav.component'
-import SideMenu from './components/nav.components/side.nav.component/side.nav.component'
+import SideMenu from './components/nav.components/side.nav.component/side.nav.component';
+import PreciousMetals from './components/dashboard.component/precious.metals.component';
+import WIGComponent from './components/dashboard.component/wig.component';
+import Cryptocurrency from './components/dashboard.component/cryptocurrency.component';
 
 class App extends PureComponent {
+
     render() {
         return (
             <div>
@@ -11,7 +15,11 @@ class App extends PureComponent {
                     <TopNav/>
                     <SideMenu/>
                 </header>
+        //        {console.log()}
                 <main>
+                    <Cryptocurrency/>
+                    <WIGComponent/>
+                    <PreciousMetals/>
                 </main>
             </div>
         );
@@ -19,3 +27,4 @@ class App extends PureComponent {
 }
 
 export default App;
+
