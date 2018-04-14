@@ -18,6 +18,8 @@ const signOut = () => {
 
 export const openGoogleSignIn = () => {
     return (dispatch) => {
+        {console.log(this.state)}
+
         auth.signInWithPopup(provider)
             .then(result => dispatch(signIn(result.user)))
             .catch(error => dispatch(presentError('Error while signin in')));

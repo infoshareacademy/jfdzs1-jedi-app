@@ -20,19 +20,19 @@ const store = createStore(
     composeEnhancers(applyMiddleware(thunk))
 );
 
-    ReactDOM.render(
-        <Provider store={store}>
-            <App/>
-        </Provider>,
-            <BrowserRouter>
-        <div>
-            <Route exact path="/" component={App} />
-            <Route exact path="/map" component={WorldMap} />
-            <Route path="/search" component={SearchItem} />
-            <Route path="/favorites" component={Favorites} />
-        </div>
-    </BrowserRouter>,
-        document.getElementById('root'),
-        registerServiceWorker()
-    );
+
+ReactDOM.render(
+    <Provider store={store}>
+        <BrowserRouter>
+            <div>
+                <Route exact path="/" component={App} />
+                <Route exact path="/map" component={WorldMap} />
+                <Route path="/search" component={SearchItem} />
+                <Route path="/favorites" component={Favorites} />
+            </div>
+        </BrowserRouter>
+    </Provider>,
+    document.getElementById('root'),
+    registerServiceWorker()
+);
 
