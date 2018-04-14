@@ -37,11 +37,9 @@ class ChangeCurrencyRate extends Component {
 
     componentWillUpdate(nextProps, nextState) {
         if (nextProps !== this.props) {
-            console.log(`Nowe propsy ${nextProps.currencyCode} stare propsy ${this.props.currencyCode}`);
             fetch(`http://api.nbp.pl/api/exchangerates/rates/c/${nextProps.currencyCode}/last/2/?format=json`)
                 .then(res => res.json())
                 .then(result => {
-                        console.log(result);
                         this.setState({
                             askPrevious: result.rates[0].ask,
                             bidPrevious: result.rates[0].bid,

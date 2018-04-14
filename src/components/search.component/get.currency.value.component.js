@@ -45,7 +45,6 @@ class GetCurrencyValue extends Component {
             return (
                 <div>
                     <LineChart currencyRates={dataCurrencyShow}/>
-                    {console.log(dataCurrencyShow)}
                 </div>
             );
         }
