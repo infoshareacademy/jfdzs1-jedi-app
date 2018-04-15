@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import './side.nav.component.css'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import styles, {appColors} from '../../../styles';
 
 export default class SideMenu extends React.Component {
@@ -12,11 +13,10 @@ export default class SideMenu extends React.Component {
         this.state = {open: true};
     }
 
-    handleToggle = () => this.setState({open: !this.state.open});
-
     render() {
         return (
-            <div>
+            <MuiThemeProvider>
+                <div>
                 <Drawer
                     containerClassName={"sideBar"}
                     zDepth={0}
@@ -24,20 +24,19 @@ export default class SideMenu extends React.Component {
                 >
                     <Link to="/" style={styles.link}>
                         <MenuItem innerDivStyle={styles.menuItemTop}
-                                  onMouseEnter={(e) => e.target.style.color = appColors.orange}
-                                  onMouseLeave={(e) => e.target.style.color = appColors.creamy}
+                                  onMouseEnter={(e) => e.target.style.color= appColors.orange}
+                        onMouseLeave={(e) => e.target.style.color = appColors.creamy}
                         >
                             Dashboard
-                        </MenuItem>
+                    </MenuItem>
                     </Link>
                     <Link to="/map" style={styles.link}>
                         <MenuItem innerDivStyle={styles.menuItem}
-                                  onMouseEnter={(e) => e.target.style.color = appColors.orange}
-                                  onMouseLeave={(e) => e.target.style.color = appColors.creamy}
+                                  onMouseEnter={(e) => e.target.style. color= appColors.orange}
+                        onMouseLeave={(e) => e.target.style.color = appColors.creamy}
                         >
                             Waluty Świata
-                        </MenuItem>
-                    </Link>
+                    </MenuItem></Link>
                     <Link to="/search" style={styles.link}>
                         <MenuItem innerDivStyle={styles.menuItem}
                                   onMouseEnter={(e) => e.target.style.color = appColors.orange}
@@ -55,7 +54,7 @@ export default class SideMenu extends React.Component {
                         </MenuItem>
                     </Link>
                 </Drawer>
-            </div>
+            </div></MuiThemeProvider>
         );
     }
 }
