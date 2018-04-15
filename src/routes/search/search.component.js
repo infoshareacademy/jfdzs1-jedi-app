@@ -114,6 +114,7 @@ class SearchItem extends Component {
                                 dataSource={dataSource}
                                 searchText={searchText}
                                 onUpdateInput={this.handleUpdateInput}
+                                style={styles.autoComplete}
                                 floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
                                 underlineFocusStyle={styles.underlineStyle}
                             />
