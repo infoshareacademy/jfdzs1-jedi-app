@@ -6,6 +6,8 @@ import PreciousMetals from './components/dashboard.component/precious.metals.com
 import WIGComponent from './components/dashboard.component/wig.component';
 import Cryptocurrency from './components/dashboard.component/cryptocurrency.component';
 import CurrencyInformation from './components/currency.information.component/currency.information.component';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
 
 class App extends PureComponent {
 
