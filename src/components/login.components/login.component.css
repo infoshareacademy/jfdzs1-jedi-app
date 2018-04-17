@@ -1,0 +1,12 @@
+.wraper{
+    margin-left: 30%;
+    margin-right: 30%;
+    background-color: rgba(8,8,8,.1) !important;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+.wraper h3{
+    text-align: center;
+}
