@@ -63,7 +63,8 @@ class Main extends PureComponent {
                 <div className={'my-pretty-chart-container'}>
                     <FloatingActionButton
                         onClick={(curr='firstcurrency', short='eur') => this.Switcher(curr, short)}><EuroSymbol/></FloatingActionButton>
-
+                    <FloatingActionButton
+                        onClick={(curr='firstcurrency', short='eur') => this.Switcher(curr, short)}>$</FloatingActionButton>
 
                     <Chart
                         chartType="LineChart"
